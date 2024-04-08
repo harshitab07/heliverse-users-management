@@ -1,25 +1,29 @@
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config();
+import cors from 'cors';
 import connectDB from './config/db.js';
-import userRoutes from './routes/userRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
-import teamRoutes from './routes/teamRoutes.js'
+import userRoutes from './routes/userRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import teamRoutes from './routes/teamRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+
+dotenv.config();
+connectDB();
 
 const port = process.env.PORT || 5000;
 
-connectDB();//whenever u call this function mongoose will secure a monnection with mongo
-
-const app = express(); 
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users',userRoutes);
-app.use('/api/teams',teamRoutes);
-app.use('/api/upload',uploadRoutes);
+// Enable CORS
+app.use(cors());
+
+app.use('/api/users', userRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/upload', uploadRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
