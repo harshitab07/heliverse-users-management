@@ -57,4 +57,3 @@ const Paginate = ({ pages, page , keyword }) => {
 };
 
 export default Paginate;
- console.log('hi');

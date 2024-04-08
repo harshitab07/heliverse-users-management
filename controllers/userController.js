@@ -38,8 +38,6 @@ const getUsers = asyncHandler(async (req, res) => {
       .limit(pageSize)
       .skip(pageSize * (page - 1));
     
-    const u = await User.find();
-    console.log(u);
     res.json({ users, page, pages: Math.ceil(count / pageSize) });
   });
 

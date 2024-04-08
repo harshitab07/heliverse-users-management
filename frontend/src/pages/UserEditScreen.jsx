@@ -28,7 +28,6 @@ const UserEditScreen = () => {
         error,
       } = useGetUserDetailsQuery(userId);
     
-      // console.log(product);
       const [updateUser, { isLoading: loadingUpdate }] = useUpdateUserMutation();
     
       const [uploadUserImage, { isLoading: loadingUpload }] =
